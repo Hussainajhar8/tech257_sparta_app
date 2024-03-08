@@ -1,6 +1,15 @@
 # Deployment Guide: Sparta Test App on Azure VM
 
-This guide provides step-by-step instructions for deploying the Sparta Test App on an Azure Linux VM. It covers two methods: copying the app folder directly from your local machine to the VM using SSH, and cloning the app from a GitHub repository onto the VM.
+To deploy Sparta Test App machine:
+
+1. **Create VM with Ubuntu 22.04 LTS**:
+   - Use Ubuntu 22.04 LTS for the VM image.
+   - Create a virtual network (VNet) with CIDR range 10.0.0.0/16 and divide it into public and private subnets (e.g., public subnet: 10.0.0.0/24).
+   - Launch the VM in the public subnet.
+   
+2. **Network Security Group (NSG)**:
+   - Create a Network Security Group (NSG).
+   - Allow inbound traffic for SSH (TCP port 22), HTTP (TCP port 80), and custom TCP port 3000.
 
 ## Overview
 
@@ -14,6 +23,7 @@ The Sparta Test App deployment involves setting up an Ubuntu 22.04 LTS Azure VM,
 2. **Copy App Folder**:
    - Navigate to the parent folder of your `tech257_sparta_app` folder.
    - Use SCP or Rsync to copy the `tech257_sparta_app` directory from your local machine to the Azure VM.
+  <br>`scp -r path_to_app/app username@<public-ip>:/destination_path/`
 
 ## Method 2: Cloning from GitHub Repository
 
@@ -22,6 +32,7 @@ The Sparta Test App deployment involves setting up an Ubuntu 22.04 LTS Azure VM,
 
 2. **Clone Repository**:
    - On the Azure VM, use the `git clone` command to clone the `tech257-sparta-app` repository onto the VM.
+  <br> Note: make sure to change into the correct directory before running npm commands (provided in order in the bash script provided at the bottom)
 
 ## Testing the Application
 
