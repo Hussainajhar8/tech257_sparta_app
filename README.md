@@ -23,10 +23,10 @@ The Sparta Test App deployment involves setting up an Ubuntu 22.04 LTS Azure VM,
 2. **Copy App Folder**:
    - Navigate to the parent folder of your `tech257_sparta_app` folder.
    - Use SCP or Rsync to copy the `tech257_sparta_app` directory from your local machine to the Azure VM.<br>
- - You have to configure SSH agent with the private key for VM access:
-   - Create an SSH agent process: eval `ssh-agent`
-   - Add the SSH key to the SSH agent: `ssh-add ~/.ssh/<private_key_name>`
-   - alternatively you can provide the input `-i ~/.ssh/<private_key_name>` to the scp command.
+   - You have to configure SSH agent with the private key for VM access:
+     - Create an SSH agent process: eval `ssh-agent`
+     - Add the SSH key to the SSH agent: `ssh-add ~/.ssh/<private_key_name>`
+     - alternatively you can provide the input `-i ~/.ssh/<private_key_name>` to the scp command.
 
   <br>`scp -r path_to_app/app username@<public-ip>:/destination_path/`
 
