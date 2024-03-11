@@ -85,8 +85,57 @@ sudo npm install
 # Install pm2
 sudo npm install pm2@latest -g
 
+# Configure reverse proxy
+# Backup default config file for safety measure
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
+
+# Add reverse proxy
+sudo sed -i '49s/.*/                proxy_pass http:\/\/127.0.0.1:3000;/' /etc/nginx/sites-available/default
+
 # Start the app
 pm2 start app.js
 
 # Restart the process
 pm2 restart app.js
+
+```
+
+## Making a reverse proxy
+### Manually
+1. cd into nginx config file directory `cd /etc/nginx/sites-available/default`
+![alt text](img/image.png)
+2. Make a backup of the default file
+![alt text](img/image-1.png)
+3. Modify the default file at add `proxy_pass http://localhost:3000;` in location block. This will redirect requests to the (default page) to the port 3000 version.
+![alt text](img/image-2.png)
+This should work!<br>
+
+Now automate by changing the script.
+Add the following into the script but before the pm2 start.
+
+```bash
+# Configure reverse proxy
+# Backup default config file for safety measure
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
+
+# Add reverse proxy
+sudo sed -i '49s/.*/                proxy_pass http:\/\/127.0.0.1:3000;/' /etc/nginx/sites-available/default
+```
+
+## Automating with User Data
+To further automate the process, utilize user data:
+
+- Manually run the commands and create a working script.
+- After ensuring the script works flawlessly, use it in user data upon creating the VM.
+- Create an image of the working application for easy replication on VMs.
+![alt text](img/image-3.png)
+
+After downloading az cli, to create the image:
+
+1. Run `az login`.
+2. Deallocate the VM using: `az vm deallocate --resource-group tech257 --name tech257-ajhar-sparta-test-app`
+3. Mark the VM for image creation using: `az vm generalize --resource-group tech257 --name tech257-ajhar-sparta-test-app`
+4. On the Azure portal, go to the VM and click on "Capture."
+5. Name and configure as desired.
+6. Recreate a vm using this image.
+   ![alt text](img/image-4.png)
