@@ -86,4 +86,7 @@ sudo npm install
 sudo npm install pm2@latest -g
 
 # Start the app
+pm2 start app.js
+
+# Restart the process
 pm2 restart app.js
