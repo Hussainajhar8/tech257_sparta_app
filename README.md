@@ -137,5 +137,5 @@ After downloading az cli, to create the image:
 3. Mark the VM for image creation using: `az vm generalize --resource-group tech257 --name tech257-ajhar-sparta-test-app`
 4. On the Azure portal, go to the VM and click on "Capture."
 5. Name and configure as desired.
-6. Recreate a vm using this image.
+6. Recreate a vm using this image.<br>
    ![alt text](img/image-4.png)
