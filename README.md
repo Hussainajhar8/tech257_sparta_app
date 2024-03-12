@@ -77,11 +77,9 @@ sudo apt-get install -y nodejs
 git clone https://github.com/Hussainajhar8/tech257_sparta_app.git
 
 # Configure reverse proxy
-# Backup default config file for safety measure
-sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
 
 # Add reverse proxy
-sudo sed -i '49s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
+sudo sed -i 'try_files $uri $uri/ =404/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
 
 # Move to the app directory
 cd tech257_sparta_app/repo/app/
@@ -115,8 +113,6 @@ Add the following into the script but before the pm2 start.
 
 ```bash
 # Configure reverse proxy
-# Backup default config file for safety measure
-cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
 
 # Add reverse proxy
 sudo sed -i '49s/.*/                proxy_pass http:\/\/127.0.0.1:3000;/' /etc/nginx/sites-available/default
