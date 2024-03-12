@@ -79,9 +79,7 @@ git clone https://github.com/Hussainajhar8/tech257_sparta_app.git
 # Configure reverse proxy
 
 # Add reverse proxy
-sudo sed -i 's|try_files \$uri \$uri/ =404|proxy_pass
-http://localhost:3000/;|'
-/etc/nginx/sites-available/default
+sudo sed -i '51s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
 
 # Move to the app directory
 cd tech257_sparta_app/repo/app/
