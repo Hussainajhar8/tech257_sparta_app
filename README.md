@@ -119,6 +119,48 @@ After thoroughly testing the script on a fresh VM multiple times and confirming 
 
 ![alt text](img/image-6.png)
 
+## Making the Final Application
+
+To finalize the application setup, follow these steps to create an image of the previous VM, which contains all dependencies installed (Nginx, Node.js, etc.) and the app folder located at the root directory in `/repo/app`.
+
+### Steps to Create Azure VM Image:
+
+1. **Deprovision User**:
+   - Use GitBash or similar terminal to deprovision the user on the VM:
+     ```
+     sudo waagent -deprovision+user
+     ```
+     ![alt text](img/image-7.png)
+
+2. **Deallocate VM**:
+   - Deallocate the VM using the Azure CLI:
+     ```
+     az vm deallocate --resource-group <resource-group-name> --name <vm-name>
+     ```
+     ![alt text](img/image-8.png)
+
+3. **Generalize VM**:
+   - Mark the VM for image creation:
+     ```
+     az vm generalize --resource-group <resource-group-name> --name <vm-name>
+     ```
+     ![alt text](img/image-9.png)
+
+4. **Capture Image**:
+   - On the Azure portal, navigate to the VM page and click on "Capture" to capture the VM image.
+
+5. **Create Image**:
+   - Follow the prompts to create the image from the captured VM.
+
+6. **Use Image for New VM**:
+   - When creating a new VM, select the newly created image to use as the base.
+   ![alt text](img/image-10.png)
+
+7. **User Script Execution**:
+   - Utilize a user script to automatically navigate into the app folder and run the application upon VM creation.
+   ![alt text](img/image-11.png)
+
+With the image created and used for new VMs, the application deployment process becomes significantly quicker and more efficient.
 
 ## Final working script
 ```bash
@@ -164,5 +206,8 @@ pm2 start app.js
 
 # Restart the process
 pm2 restart app.js
+
+# Save the process
+pm2 save
 
 ```
