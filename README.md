@@ -58,12 +58,12 @@ Use the provided Bash script to automate the deployment process. The script perf
 ```bash
 #!/bin/bash
 
-# Update and upgrade the system
-sudo apt update -y
-sudo apt upgrade -y
+# Update and upgrade the system, `DEBIAN_FRONTEND=noninteractive` to bypass user-prompts
+sudo DEBIAN_FRONTEND=noninteractive apt update -y
+sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 
 # Install nginx
-sudo apt install nginx -y
+sudo DEBIAN_FRONTEND=noninteractive apt install nginx -y
 
 # Start and enable nginx
 sudo systemctl restart nginx
