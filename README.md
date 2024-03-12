@@ -78,7 +78,7 @@ git clone https://github.com/Hussainajhar8/tech257_sparta_app.git
 
 # Configure reverse proxy
 # Backup default config file for safety measure
-cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
 
 # Add reverse proxy
 sudo sed -i '49s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
