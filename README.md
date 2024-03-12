@@ -90,7 +90,7 @@ sudo npm install pm2@latest -g
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
 
 # Add reverse proxy
-sudo sed -i '49s/.*/                proxy_pass http:\/\/127.0.0.1:3000;/' /etc/nginx/sites-available/default
+sudo sed -i '49s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
 
 # Start the app
 pm2 start app.js
