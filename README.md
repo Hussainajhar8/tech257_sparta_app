@@ -158,8 +158,18 @@ To finalize the application setup, follow these steps to create an image of the 
 
 7. **User Script Execution**:
    - Utilize a user script to automatically navigate into the app folder and run the application upon VM creation.
+   - Use the following script:<br>
+       ```bash
+      # Move to app repo
+      cd tech257_sparta_app/repo/app/
+      
+      # Stop any running processes
+      pm2 stop all
+      
+      # Run the application using pm2
+      pm2 start app.js
+      ```
    ![alt text](img/image-11.png)
-
 With the image created and used for new VMs, the application deployment process becomes significantly quicker and more efficient.
 
 ## Final working script
@@ -185,8 +195,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
 git clone https://github.com/Hussainajhar8/tech257_sparta_app.git
 
 # Configure reverse proxy
-
-# Add reverse proxy
 sudo sed -i '51s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
 
 # Reload Nginx to apply changes
@@ -209,5 +217,4 @@ pm2 restart app.js
 
 # Save the process
 pm2 save
-
 ```
