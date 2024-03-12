@@ -130,12 +130,27 @@ To further automate the process, utilize user data:
 - Create an image of the working application for easy replication on VMs.
 ![alt text](img/image-3.png)
 
+## Creating an Azure vm image
+
+An Azure image is a reusable, customized template for quickly creating new virtual machines. By creating and using an Azure image, you can replicate your configured VM setup across multiple instances, saving time and ensuring consistency in deployments.
+
+Prepare Azure VM:
+
+1. Using the terminal, in the current running VM, ensure everything is backed up and not needed as everything not in root will be wiped.
+2. Run the following command to wipe everything to root level: `sudo waagent -deprovision+user`.
+3. Exit the VM.
+
 After downloading az cli, to create the image:
 
 1. Run `az login`.
-2. Deallocate the VM using: `az vm deallocate --resource-group tech257 --name tech257-ajhar-sparta-test-app`
+2. Using the terminal deallocate the VM using: `az vm deallocate --resource-group tech257 --name tech257-ajhar-sparta-test-app`
 3. Mark the VM for image creation using: `az vm generalize --resource-group tech257 --name tech257-ajhar-sparta-test-app`
 4. On the Azure portal, go to the VM and click on "Capture."
-5. Name and configure as desired.
-6. Recreate a vm using this image.<br>
-   ![alt text](img/image-4.png)
+5. Name and configure as desired and click `Review + create`.<br>
+   ![alt text](img/image-5.png)<br>
+6. Click Create.
+7. Once the image is created, go to the resource.
+8. Click on Create VM.
+9. Fill in the details using this image and click Review + create.<br>
+   ![alt text](img/image-4.png)<br>
+10. Click Create.
