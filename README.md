@@ -77,7 +77,7 @@ sudo apt-get install -y nodejs
 git clone https://github.com/Hussainajhar8/tech257_sparta_app.git
 
 # Move to the app directory
-cd tech257_sparta_app/nodejs20-sparta-test-app/app/
+cd tech257_sparta_app/repo/app/
 
 # Install npm
 sudo npm install
