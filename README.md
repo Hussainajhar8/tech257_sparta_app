@@ -55,49 +55,6 @@ Use the provided Bash script to automate the deployment process. The script perf
 5. Installs npm and pm2.
 6. Starts the application using pm2.
 
-```bash
-#!/bin/bash
-
-# Update and upgrade the system, `DEBIAN_FRONTEND=noninteractive` to bypass user-prompts
-sudo DEBIAN_FRONTEND=noninteractive apt update -y
-sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
-
-# Install nginx
-sudo DEBIAN_FRONTEND=noninteractive apt install nginx -y
-
-# Start and enable nginx
-sudo systemctl restart nginx
-sudo systemctl enable nginx
-
-# Install nodejs
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-# Clone the repository
-git clone https://github.com/Hussainajhar8/tech257_sparta_app.git
-
-# Configure reverse proxy
-
-# Add reverse proxy
-sudo sed -i '51s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
-
-# Move to the app directory
-cd tech257_sparta_app/repo/app/
-
-# Install npm
-sudo npm install
-
-# Install pm2
-sudo npm install pm2@latest -g
-
-# Start the app
-pm2 start app.js
-
-# Restart the process
-pm2 restart app.js
-
-```
-
 ## Making a reverse proxy
 ### Manually
 1. cd into nginx config file directory `cd /etc/nginx/sites-available/default`
@@ -150,3 +107,62 @@ After downloading az cli, to create the image:
 9. Fill in the details using this image and click Review + create.<br>
    ![alt text](img/image-4.png)<br>
 10. Click Create.
+
+## Testing VM with new image
+
+During testing of the VM with the new image, we encountered an issue related to user prompts from the kernel during script execution. To overcome this issue, we utilized the `DEBIAN_FRONTEND=noninteractive` environment variable, which bypasses user prompts.<br>
+`sudo DEBIAN_FRONTEND=noninteractive apt update -y`<br>
+`sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y`<br>
+By adding this variable in front of installation and upgrade commands, we ensure that our script runs smoothly without requiring manual intervention.
+
+After thoroughly testing the script on a fresh VM multiple times and confirming satisfactory results, proceed to run the script as user data on a new VM.
+
+![alt text](img/image-6.png)
+
+
+## Final working script
+```bash
+#!/bin/bash
+
+# Update and upgrade the system, `DEBIAN_FRONTEND=noninteractive` to bypass user-prompts
+sudo DEBIAN_FRONTEND=noninteractive apt update -y
+sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
+
+# Install nginx
+sudo DEBIAN_FRONTEND=noninteractive apt install nginx -y
+
+# Start and enable nginx
+sudo DEBIAN_FRONTEND=noninteractive systemctl restart nginx
+sudo DEBIAN_FRONTEND=noninteractive systemctl enable nginx
+
+# Install nodejs
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo DEBIAN_FRONTEND=noninteractive -E bash -
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+
+# Clone the repository
+git clone https://github.com/Hussainajhar8/tech257_sparta_app.git
+
+# Configure reverse proxy
+
+# Add reverse proxy
+sudo sed -i '51s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
+
+# Reload Nginx to apply changes
+sudo DEBIAN_FRONTEND=noninteractive systemctl reload nginx
+
+# Move to the app directory
+cd tech257_sparta_app/repo/app/
+
+# Install npm
+sudo DEBIAN_FRONTEND=noninteractive npm install
+
+# Install pm2
+sudo DEBIAN_FRONTEND=noninteractive npm install pm2@latest -g
+
+# Start the app
+pm2 start app.js
+
+# Restart the process
+pm2 restart app.js
+
+```
