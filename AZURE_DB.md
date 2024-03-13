@@ -13,12 +13,12 @@ The deployment process involves setting up a MongoDB database on an Azure VM man
 ### Manually Setting Up VM:
 **Creating a VM:**
   Configure the VM similar to previous instances with the   following specifications:
-  - Use Ubuntu 22.04 LTS or a similar image.
+  - Use Ubuntu 22.04 LTS or a similar img/image.
   - Allow inbound port 22 for SSH.
   - Deploy the VM in a private subnet. Create a new security group (SG) that allows inbound port 22 TCP from any source.
 <br>Review should look similar to this:<br>
-![alt text](image.png)
-![alt text](image-1.png)
+![alt text](img/image-15.png)
+![alt text](img/image-12.png)
 
 1. **Update System**:
    `sudo apt-get update`
@@ -72,11 +72,11 @@ The deployment process involves setting up a MongoDB database on an Azure VM man
      ```bash
      export DB_HOST=mongodb://<private-ip-of-database>:27017/posts
      ```
-     ![alt text](image-2.png)
+     ![alt text](img/image-13.png)
 
 2. **Stop Current Application Process**:
    - Change into the app directory and stop the current application process to register the database connection upon restarting it. In this case, use a kill command on the pm2 process running the app.
-    ![alt text](image-3.png)<br>
+    ![alt text](img/image-14.png)<br>
     Then install npm and start the application
      ```bash
      sudo -E npm install
