@@ -2,7 +2,7 @@
 
 ## Important Notes
 
-- We use the private IP address when connecting the app to the database for security reasons. Using the private IP avoids the need to open port 27017 in the security group and specify the port alongside the public IP. By default, Azure allows connections within the same VNet and stays within the VNet when using the private IP.
+  We use the private IP address when connecting the app to the database for security reasons. Using the private IP avoids the need to open port 27017 in the security group and specify the port alongside the public IP. By default, Azure allows connections within the same VNet and stays within the VNet when using the private IP.
 
 ## Overview
 
@@ -11,6 +11,14 @@ The deployment process involves setting up a MongoDB database on an Azure VM man
 ## Manual Setup
 
 ### Manually Setting Up VM:
+**Creating a VM:**
+  Configure the VM similar to previous instances with the   following specifications:
+  - Use Ubuntu 22.04 LTS or a similar image.
+  - Allow inbound port 22 for SSH.
+  - Deploy the VM in a private subnet. Create a new security group (SG) that allows inbound port 22 TCP from any source.
+<br>Review should look similar to this:<br>
+![alt text](image.png)
+![alt text](image-1.png)
 
 1. **Update System**:
    `sudo apt-get update`
@@ -45,7 +53,7 @@ The deployment process involves setting up a MongoDB database on an Azure VM man
 
 9. **Configure MongoDB Bind IP**:
    Modify the MongoDB configuration file to allow inbound traffic from all sources within the VNet:
-  `sudo sed -i 's@127.0.0.1@0.0.0.0@' /etc/mongod.conf`
+   `sudo vim /etc/mongod.conf` and change bind ip to 0.0.0.0 to allow inbound from all traffic within the vnet.
 
 10.  **Start MongoDB Service**:
  ```
@@ -53,8 +61,30 @@ The deployment process involves setting up a MongoDB database on an Azure VM man
  sudo systemctl enable mongod
  ```
 
-11.  **Check MongoDB Service Status**:
+11.   **Check MongoDB Service Status**:
  `sudo systemctl status mongod`
+
+### Connect Application to MongoDB
+
+1. **Set Environment Variable**:
+   - SSH into the application VM.
+   - Set up the environment variable to connect the application to the MongoDB database. The `-E` flag is used with `sudo` to preserve the current user's environment variables:
+     ```bash
+     export DB_HOST=mongodb://<private-ip-of-database>:27017/posts
+     ```
+     ![alt text](image-2.png)
+
+2. **Stop Current Application Process**:
+   - Change into the app directory and stop the current application process to register the database connection upon restarting it. In this case, use a kill command on the pm2 process running the app.
+    ![alt text](image-3.png)<br>
+    Then install npm and start the application
+     ```bash
+     sudo -E npm install
+     sudo -E npm start
+     ```
+
+1. **Verify Connection**:
+   - Check if the application is connected properly by adding the `/posts` extension to the application address (`<application-domain>/posts`). This should display the correct webpage.
 
 ## Automated Setup
 
