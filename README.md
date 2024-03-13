@@ -160,6 +160,7 @@ To finalize the application setup, follow these steps to create an image of the 
    - Utilize a user script to automatically navigate into the app folder and run the application upon VM creation.
    - Use the following script:<br>
        ```bash
+      #!/bin/bash
       # Move to app repo
       cd tech257_sparta_app/repo/app/
       
