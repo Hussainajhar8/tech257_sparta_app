@@ -125,3 +125,4 @@ like this <br> `ssh -i ~/.ssh/ajhar_az_key -p 50000 adminuser@4.159.37.3`<br>
   To be efficient we will do it on the resource group page, select them all and delete together.
 
   ![alt text](image-13.png)
+  ![alt text](image-15.png)
