@@ -79,14 +79,14 @@ az storage container create \
     --public-access container
 
 # Get cat image
-curl -o azure_vs_aws.png https://raw.githubusercontent.com/Hussainajhar8/tech257_sparta_app/main/img/azure_vs_aws.png
+curl -o cat_jumping.png https://as2.ftcdn.net/v2/jpg/05/99/90/93/1000_F_599909341_ACLSiB9s2KekiUlrEUCRlPyVAaY6XQFu.webp
 
 # Upload cat image to blob
 az storage blob upload \
     --account-name tech257ajharstorage \
     --container-name testcontainer \
     --name cat.png \
-    --file azure_vs_aws.png \
+    --file cat_jumping.png \
     --auth-mode login \
     --overwrite
 
@@ -94,7 +94,7 @@ az storage blob upload \
 blob_url=$(az storage blob url \
     --account-name tech257ajharstorage \
     --container-name testcontainer \
-    --name azure_vs_aws.png \
+    --name cat.png \
     --output tsv)
 
 # Print the blob url for testing purposes
