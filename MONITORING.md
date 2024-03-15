@@ -95,6 +95,8 @@ To create a scale set:
 
 ## Purpose of using Azure Scale Sets
 
+![alt text](image-14.png)
+
 ### Load balancer
 - The purpose of the load balancer is to distribute traffic across the instances, it will also be the public access point to our vms and scale set.
 
