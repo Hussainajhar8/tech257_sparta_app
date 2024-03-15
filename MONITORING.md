@@ -45,57 +45,57 @@ To create a scale set:
 1. **Use an Appropriate Name and Image**
    
     - Choose a suitable name and use the ready-to-run application image.
-    ![alt text](image.png)
+    ![alt text](img/scale_set_images/image.png)
    
 2. **Network Configuration**
    
     - In the networking tab, select your virtual network (VNet) and click the edit button on the available network interface.
-    ![alt text](image-1.png)
+    ![alt text](img/scale_set_images/image-1.png)
 
     - Select `Basic` in the "NIC network security group" section to create a new network security group. Allow access on ports 80 and 22. Click `OK`.
-    ![alt text](image-2.png)
+    ![alt text](img/scale_set_images/image-2.png)
     
 3. **Load Balancer Configuration**
    
     - At the bottom of the networking page, select "Azure Load Balancer" and create a load balancer.
-    ![alt text](image-3.png)
+    ![alt text](img/scale_set_images/image-3.png)
     
     - Ensure the default settings are configured appropriately. Change the name as needed.
-    ![alt text](image-4.png)
+    ![alt text](img/scale_set_images/image-4.png)
     
 4. **Scaling Configuration**
    
     - In the "Scaling" section, click `Custom` and configure the settings according to your needs. For high availability, set the initial instance count to 2.
-    ![alt text](image-5.png)
+    ![alt text](img/scale_set_images/image-5.png)
     
 5. **Health Monitoring**
    
     - Ensure there is enough application health monitoring. By default, health checks are done on port 80 to look for healthy HTTP requests. This allows the scale set to know when to create or delete instances.
-    ![alt text](image-6.png)
+    ![alt text](img/scale_set_images/image-6.png)
     
 6. **Advanced Configuration**
    
     - In the "Advanced" section, add the user data to run the application upon boot.
-    ![alt text](image-7.png)
+    ![alt text](img/scale_set_images/image-7.png)
     
 7. **Tags and Review**
    
     - Select appropriate tags and click `Review and Create` once you are satisfied.
-    ![alt text](image-8.png) 
+    ![alt text](img/scale_set_images/image-8.png) 
     
 8. **Deployment**
    
     - Once deployed, go to the scale set resource. In the overview page, you should see the public IP of your application load balancer. Entering this IP into the browser should display your application.
-    ![alt text](image-9.png)
+    ![alt text](img/scale_set_images/image-9.png)
     
 9. **Congratulations!**
    
     - You have successfully launched a scale set.
-  ![alt text](image-10.png)
+  ![alt text](img/scale_set_images/image-10.png)
 
 ## Purpose of using Azure Scale Sets
 
-![alt text](image-14.png)
+![alt text](img/scale_set_images/image-14.png)
 
 ### Load balancer
 - The purpose of the load balancer is to distribute traffic across the instances, it will also be the public access point to our vms and scale set.
@@ -108,11 +108,11 @@ To create a scale set:
 ### How to SSH into an instance
 - The way we setup our scale set and its security group will not allow ssh access to our instances directly from the internet (we can only ssh directly from within the same vnet)
 
-![alt text](image-11.png)
+![alt text](img/scale_set_images/image-11.png)
 
 - So in order to SSH into our virtual machines we have to use the frontend port specified in our loadbalancer and the public ip of the loadbalancer.
 like this <br> `ssh -i ~/.ssh/ajhar_az_key -p 50000 adminuser@4.159.37.3`<br>
-![alt text](image-12.png)
+![alt text](img/scale_set_images/image-12.png)
 
 ## Cleaning up
 - To delete the scale set, you will need to delete the following:
@@ -124,5 +124,5 @@ like this <br> `ssh -i ~/.ssh/ajhar_az_key -p 50000 adminuser@4.159.37.3`<br>
   In the correct order or at the same time, this is because you cannot delete the latter parts whilst they are in use.
   To be efficient we will do it on the resource group page, select them all and delete together.
 
-  ![alt text](image-13.png)
-  ![alt text](image-15.png)
+  ![alt text](img/scale_set_images/image-13.png)
+  ![alt text](img/scale_set_images/image-15.png)

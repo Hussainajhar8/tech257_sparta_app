@@ -41,8 +41,13 @@ blob_url=$(az storage blob url \
 # Print the blob url for testing purposes
 # echo "Blob URL: $blob_url"
 
+# CD into app directory
+cd /tech257_sparta_app/repo/app/
+
 # Replace the image source in the index.ejs file
 sudo sudo sed -i "28s~.*~    <img src=\"$blob_url\" />~" /tech257_sparta_app/repo/app/views/index.ejs
+
+pm2 restart app.js
 
 # Print the index.ejs file for testing purposes
 # cat /tech257_sparta_app/repo/app/views/index.ejs
