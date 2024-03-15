@@ -100,6 +100,9 @@ blob_url=$(az storage blob url \
 # Print the blob url for testing purposes
 # echo "Blob URL: $blob_url"
 
+# CD into app directory
+cd /tech257_sparta_app/repo/app/
+
 # Replace the image source in the index.ejs file
 sudo sudo sed -i "28s~.*~    <img src=\"$blob_url\" />~" /tech257_sparta_app/repo/app/views/index.ejs
 
@@ -124,6 +127,9 @@ az storage account delete --name tech257ajharstorage --resource-group tech257
 
 # Remove the cat image
 sudo sudo sed -i "28s~.*~" /tech257_sparta_app/repo/app/views/index.ejs
+
+# CD into app directory
+cd /tech257_sparta_app/repo/app/
 
 # Stop any running processes
 pm2 stop all
