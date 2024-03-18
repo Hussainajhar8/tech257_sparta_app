@@ -12,6 +12,39 @@ Blob storage in Azure is a service designed for storing unstructured data like d
 
 - **Redundancy Options**: Blob storage offers redundancy options to ensure data durability. The Locally Redundant Storage (LRS) option is cost-effective, storing three copies of data locally within a region for redundancy.
 
+### Difference Between Blob Storage and File System
+
+- **Blob Storage**: Data in Blob Storage is organized in a flat hierarchy. It comprises a storage account, which can hold multiple containers, and each container can store an unlimited number of blobs (files). There are no traditional folders or directories, and blobs are accessed via unique URLs.
+
+- **File System**: Operating systems like Linux, Windows, or Mac use a hierarchical structure with directories (folders) containing files. Navigation through directories is required to locate specific files.
+
+### Advantages and Disadvantages of Blob Storage
+
+**Advantages**:
+
+- **Scalability**: Blob Storage can scale to handle massive volumes of data efficiently.
+- **Accessibility**: Data stored in Blob Storage can be accessed from anywhere with an internet connection.
+- **Durability**: Blob Storage offers high durability, ensuring data integrity even in the face of hardware failures.
+- **Cost-Effectiveness**: It can be more cost-effective than maintaining an on-premises storage infrastructure.
+
+**Disadvantages**:
+
+- Blob Storage may lack certain features compared to traditional file systems in specific use cases.
+- It may require some time to understand and adapt to Blob Storage, especially for users accustomed to traditional file systems.
+- Blob Storage relies on internet connection which could be a blocker.
+
+### Different Tiers in Blob Storage
+
+- **Hot Access Tier**: Designed for frequently accessed data, offering higher storage costs but lower access costs.
+- **Cool Access Tier**: Optimized for infrequently accessed data, featuring lower storage costs but higher access costs.
+- **Archive Access Tier**: Tailored for rarely accessed data stored over extended periods, providing the lowest storage costs but highest access costs. 
+
+### Parts of Azure Blob Storage
+
+- **Account**: The primary storage account created in Azure, serving as a container for all stored data.
+- **Container**: Within the storage account, users can create multiple containers, each acting as a bucket to store blobs.
+- **Blob**: Actual files uploaded to Blob Storage, which can include various types of data.
+
 ## Installation
 
 To interact with Azure blob storage, you'll need to install the Azure CLI on your VM. Use the following command:
