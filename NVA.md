@@ -1,4 +1,4 @@
-### Creating a 3 Subnet Architecture for Database Privacy
+# Creating a 3 Subnet Architecture for Database Privacy
 
 To enhance the security of our database, we will create an NVA (Network virtual appliance) to act as firewall to make access policies and restrict what can communicate with our database. We will create a virtual network with three subnets: public, demilitarized zone (DMZ), and private subnet. Traffic for the database will be forwarded from the public subnet to the database via the nva.
 
@@ -9,7 +9,6 @@ To enhance the security of our database, we will create an NVA (Network virtual 
    ![alt text](nva_img/image-1.png)
    - Review making sure the settings are as shown and create.
    ![alt text](nva_img/image-2.png)
-
 
 2. **Deploy Virtual Machines**:
    - Create three virtual machines: one for the application, one for the network virtual appliance (NVA), and one for the database.
